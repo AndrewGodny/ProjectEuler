@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
@@ -83,23 +84,46 @@ void task8(char * huge_number)
 	cout << result << endl << result.size() << endl << product << endl;
 }
 
-void task9()
+void task9(int sum)
 {
-	int a = 0, b = 0, c = 0;
-	int m = 10, n = 2;
-	while (a + b + c != 1000)
-	{
-		a = m * m - n * n;
-		b = 2 * m * n;
-		c = m * m + n * n;
-		cout << a << "+" << b << "+" << c << "=" << a + b + c << endl;
-		m++;
-		if (m > 499)
+	/*
+		Helper lamba-function
+	*/
+	auto gcd = [](int a, int b) {
+		while (b != 0)
 		{
-			n++; m = n + 5;
+			int buf = a % b;
+			a = b; b = buf;
+		}
+		return a;
+	};
+	
+	int s = sum / 2;
+	int limit = ceil(sqrt(s)) - 1;
+	for (int m = 2; m < limit; m++)
+	{
+		if (s % m == 0)
+		{
+			int sm = s / m;
+			while (sm % 2 == 0) sm /= 2;
+			int k;
+			if (m % 2 == 1) k = m + 2; else k = m + 1;
+			while (k < 2 * m && k <= sm)
+			{
+				if (sm % k == 0 && gcd(k, m) == 1)
+				{
+					int d = s / (k * m);
+					int n = k - m;
+					int a = d * (m * m - n * n);
+					int b = 2 * d * m * n;
+					int c = d * (m * m + n * n);
+					cout << a << "*" << b << "*"<< c << "=" << a * b * c << endl;
+					return;
+				}
+				k += 2;
+			}
 		}
 	}
-	cout << a * b * c << endl;
 }
 
 }

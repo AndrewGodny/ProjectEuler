@@ -53,5 +53,5 @@ void task8(char* huge_number);
 	There exists exactly one Pythagorean triplet for which a + b + c = 1000.
 	Find the product abc.
 */
-void task9();
+void task9(int sum);
 }
