@@ -2,6 +2,7 @@
 using namespace std;
 
 #include "problem_set.h"
+using namespace ProjectEuler;
 
 int main(int argc, char* argv)
 {

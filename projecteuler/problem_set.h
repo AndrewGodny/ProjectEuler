@@ -1,5 +1,7 @@
 #pragma once
 
+namespace ProjectEuler
+{
 /*
 	The sum of the squares of the first ten natural numbers is,
 		12 + 22 + ... + 102 = 385
@@ -52,3 +54,4 @@ void task8(char* huge_number);
 	Find the product abc.
 */
 void task9();
+}

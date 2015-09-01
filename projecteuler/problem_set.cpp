@@ -6,6 +6,9 @@
 
 using namespace std;
 
+namespace ProjectEuler
+{
+
 void task6(int max)
 {
 	long square = 0;
@@ -97,4 +100,6 @@ void task9()
 		}
 	}
 	cout << a * b * c << endl;
+}
+
 }
