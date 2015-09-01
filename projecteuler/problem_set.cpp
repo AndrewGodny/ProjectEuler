@@ -126,4 +126,24 @@ void task9(int sum)
 	}
 }
 
+void task10(int n)
+{
+	auto isPrime = [](int a) {
+		if (a < 2) return false;
+		if (a == 2) return true;
+		if (!(a % 2)) return false;
+		for (int i = 3; i <= sqrt((double)a); i += 2)
+			if (!(a % i)) return false;
+		return true;
+	};
+
+	long long sum = 2;
+	for (int i = 3; i <= n; i += 2)
+		if (isPrime(i))
+		{
+			sum += i;
+		}
+	cout << sum << endl;
+}
+
 }

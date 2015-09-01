@@ -54,4 +54,11 @@ void task8(char* huge_number);
 	Find the product abc.
 */
 void task9(int sum);
+
+/*
+	The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
+	Find the sum of all the primes below two million.
+*/
+void task10(int n);
+
 }
