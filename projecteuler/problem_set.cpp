@@ -128,21 +128,17 @@ void task9(int sum)
 
 void task10(int n)
 {
-	auto isPrime = [](int a) {
-		if (a < 2) return false;
-		if (a == 2) return true;
-		if (!(a % 2)) return false;
-		for (int i = 3; i <= sqrt((double)a); i += 2)
-			if (!(a % i)) return false;
-		return true;
-	};
-
+	int sieve_bound = (n - 1) / 2;
+	vector<bool> sieve(sieve_bound);
+	fill(sieve.begin(), sieve.end(), false);
+	int crosslimit = (floor(sqrt(n)) - 1) / 2;
+	for (int i = 1; i < crosslimit; i++)
+		if (!sieve[i])
+			for (int j = 2 * i * (i + 1); j < sieve_bound; j += 2 * i + 1)
+				sieve[j] = true;
 	long long sum = 2;
-	for (int i = 3; i <= n; i += 2)
-		if (isPrime(i))
-		{
-			sum += i;
-		}
+	for (int i = 1; i < sieve_bound; i++)
+		if (!sieve[i]) sum += 2 * i + 1;
 	cout << sum << endl;
 }
 
