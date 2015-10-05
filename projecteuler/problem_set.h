@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 namespace ProjectEuler
 {
 /*
@@ -19,7 +21,7 @@ void task6(int max);
 void task7(int prime_index);
 
 /*
-	The four adjacent digits in the 1000-digit number that have the greatest product are 9 × 9 × 8 × 9 = 5832.
+	The four adjacent digits in the 1000-digit number that have the greatest product are 9 * 9 * 8 * 9 = 5832.
 
 		73167176531330624919225119674426574742355349194934
 		96983520312774506326239578318016984801869478851843
@@ -60,5 +62,13 @@ void task9(int sum);
 	Find the sum of all the primes below two million.
 */
 void task10(int n);
+
+/*
+	In the 20?20 grid (task11.txt), four numbers along a diagonal line have been marked in red.
+	The product of these numbers is 26 ? 63 ? 78 ? 14 = 1788696.
+
+	What is the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the 20?20 grid?
+*/
+void task11(std::string filename);
 
 }

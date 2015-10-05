@@ -1,8 +1,10 @@
 #include "problem_set.h"
 
 #include <vector>
-#include <string>
 #include <iostream>
+#include <iomanip>
+#include <fstream>
+#include <sstream>
 #include <algorithm>
 
 using namespace std;
@@ -140,6 +142,108 @@ void task10(int n)
 	for (int i = 1; i < sieve_bound; i++)
 		if (!sieve[i]) sum += 2 * i + 1;
 	cout << sum << endl;
+}
+
+void task11(std::string filename)
+{
+	vector<vector<int>> data;
+	// Read matrix from file
+	ifstream file(filename);
+	if (file.is_open())
+	{
+		string line;
+		while (!getline(file, line).eof())
+		{
+			istringstream reader(line);
+			vector<int> line_data;
+			while (!reader.eof())
+			{
+				int elem;
+				reader >> elem;
+				line_data.push_back(elem);
+			}
+			data.push_back(line_data);
+		}
+		file.close();
+	}
+	else
+	{
+		throw new exception("Can't open data file");
+	}
+	
+	// Get submatrix 4X4. If such matrix can't be built return emprty matrix
+	auto getSubMatrix = [data](int x, int y) {
+		vector<vector<int>> matrix;
+		// Check if indexes are in bounds
+		if (data.size() < x + 4)		return matrix;
+		if (data[x].size() < y + 4)	return matrix;
+		for (int i = x; i < x + 4; ++i)
+		{
+			vector<int> line;
+			for (int j = y; j < y + 4; ++j)
+				line.push_back(data[i][j]);
+			matrix.push_back(line);
+		}
+		return matrix;
+	};
+
+	// Find greatest product of elements in matrix by rows, columns and diagonals
+	auto greatestProduct = [](vector<vector<int>> matrix)
+	{
+		if (matrix.empty())
+		{
+			std::cout << "Matrix is empty" << std::endl;
+			return (long)1;
+		}
+		long final_res = 1;
+		long res_one = 1, res_two = 1;
+
+		for (int i = 0; i < matrix.size(); ++i)
+		{
+			res_one = 1; res_two = 1;
+			for (int j = 0; j < matrix[i].size(); ++j)
+			{
+				res_one *= matrix[i][j];
+				res_two *= matrix[j][i];
+			}
+			std::cout << i + 1 << " row =\t\t" << res_one << std::endl;
+			std::cout << i + 1 << " column =\t" << res_two << std::endl << std::endl;
+			int res = res_one > res_two ? res_one : res_two;
+			if (res > final_res) final_res = res;
+		}		
+		res_one = res_two = 1;
+		int delta = matrix.size() - 1;
+		for (int i = 0; i < matrix.size(); ++i)
+		{
+			res_one *= matrix[i][i];
+			res_two *= matrix[i][delta - i];
+		}
+		std::cout << "first diagonal = " << res_one << std::endl;
+		std::cout << "second diagonal = " << res_two << std::endl;
+		res_one = res_one > res_two ? res_one : res_two;
+		final_res = res_one > final_res ? res_one : final_res;
+
+		return final_res;
+	};
+	/*
+	vector<vector<int>> test = getSubMatrix(0, 0);
+	for (int i = 0; i < test.size(); ++i)
+	{
+		for (int j = 0; j < test[i].size(); j++)
+			std::cout << setw(2) << test[i][j] << " ";
+		std::cout << std::endl;
+	}
+	long product = greatestProduct(test);
+	std::cout << "\nGreatest product = " << product << std::endl;
+	*/
+	long res = 0;
+	for (int i = 0; i < data.size() - 4; ++i)
+		for (int j = 0; j < data[i].size() - 4; j++)
+		{
+			long curr = greatestProduct(getSubMatrix(i, j));
+			if (curr > res) res = curr;
+		}
+	std::cout << "\nGreatest product = " << res << std::endl;
 }
 
 }

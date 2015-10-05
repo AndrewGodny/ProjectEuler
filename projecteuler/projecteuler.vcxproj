@@ -124,6 +124,9 @@
   <ItemGroup>
     <ClInclude Include="problem_set.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="task11.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

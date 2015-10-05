@@ -27,4 +27,7 @@
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="task11.txt" />
+  </ItemGroup>
 </Project>
