@@ -246,4 +246,25 @@ void task11(std::string filename)
 	std::cout << "\nGreatest product = " << res << std::endl;
 }
 
+void task12()
+{
+	// Count amount of factors for number
+	auto countFactors = [](long long number) {
+		int res = 0;
+		long long max_check = sqrt(number);
+		for (long long challenge = 1; challenge < max_check; challenge++)
+			if (number % challenge == 0) res++;
+		return res * 2;
+	};
+
+	long long number = 1, index = 1;
+	int total_factors = 1;
+	while (total_factors < 500)
+	{
+		number += ++index;
+		total_factors = countFactors(number);
+	}
+	std::cout << "Result: " << number << std::endl << "; Total factors: " << total_factors << std::endl;
+}
+
 }
