@@ -267,4 +267,51 @@ void task12()
 	std::cout << "Result: " << number << std::endl << "; Total factors: " << total_factors << std::endl;
 }
 
+void task13(std::string file_name)
+{
+	vector<vector<short>> data;
+	data.reserve(100);
+	// Read matrix from file
+	ifstream file(file_name);
+	if (file.is_open())
+	{
+		string line;
+		auto parseLine = [](const string& line) {
+			vector<short> line_data;
+			for (char c : line)
+			{
+				line_data.push_back(c - '0');
+			}
+			reverse(line_data.begin(), line_data.end());
+			return line_data;
+		};
+		while (!getline(file, line).eof())
+		{			
+			data.push_back(parseLine(line));
+		}
+		data.push_back(parseLine(line));
+		file.close();
+	}
+	else
+	{
+		throw new exception("Can't open data file");
+	}
+
+	long carrier = 0;
+	std::string result;
+	for (int col = 0; col < 50; col++)
+	{
+		long sum = carrier;
+		for (int row = 0; row < data.size(); row++)
+		{
+			sum += data[row][col];
+		}
+		result.push_back((sum % 10) + '0');
+		carrier = sum / 10;
+	}
+	result += to_string(carrier);
+	reverse(result.begin(), result.end());
+	std::cout << "Result: " << result << std::endl;
+}
+
 }

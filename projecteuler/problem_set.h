@@ -88,4 +88,9 @@ void task11(std::string filename);
 */
 void task12();
 
+/*
+	Work out the first ten digits of the sum of the one - hundred 50 - digit numbers. (task13.txt)
+*/
+void task13(std::string file_name);
+
 }
